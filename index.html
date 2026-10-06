@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vé máy bay đi Đà Nẵng | A/B CTA Demo</title>
+  <style>
+    :root { --blue:#0757b9; --deep:#063675; --orange:#ff6500; --ink:#14213d; --muted:#64748b; --line:#dbe8f5; --bg:#f3f8fd; --white:#fff; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--bg); font-family:Arial,"Noto Sans KR",sans-serif; line-height:1.55; }
+    .container { width:min(1120px,calc(100% - 36px)); margin:auto; }
+    header { position:sticky; top:0; z-index:10; background:#fff; box-shadow:0 2px 16px rgba(0,0,0,.08); }
+    .nav { min-height:70px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+    .brand { color:var(--blue); font-weight:900; font-size:21px; text-decoration:none; }
+    nav { display:flex; gap:20px; }
+    nav a { color:var(--ink); text-decoration:none; font-weight:700; font-size:14px; }
+    .hero { position:relative; overflow:hidden; padding:92px 0 155px; color:#fff; text-align:center; background:linear-gradient(135deg,rgba(4,43,99,.9),rgba(17,139,220,.7)),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1900&q=85") center/cover; }
+    .hero h1 { max-width:800px; margin:18px auto; font-size:clamp(36px,5vw,58px); line-height:1.15; }
+    .hero p { max-width:690px; margin:auto; font-size:18px; }
+    .badge { display:inline-block; padding:8px 15px; border:1px solid rgba(255,255,255,.4); border-radius:999px; background:rgba(255,255,255,.15); font-weight:800; }
+    .plane { position:absolute; left:-100px; top:125px; font-size:50px; animation:fly 13s linear infinite; }
+    @keyframes fly { from { transform:translateX(0) rotate(12deg); } to { transform:translateX(125vw) rotate(12deg); } }
+    .search-wrap { position:relative; z-index:2; margin-top:-80px; }
+    .card { padding:28px; border-radius:18px; background:#fff; box-shadow:0 15px 45px rgba(7,61,120,.16); }
+    .form { display:grid; grid-template-columns:1fr 1fr 1fr 1fr auto; gap:12px; align-items:end; }
+    .field { display:flex; flex-direction:column; gap:7px; }
+    label { font-size:13px; font-weight:800; }
+    input,select { height:51px; width:100%; padding:0 13px; border:1px solid var(--line); border-radius:10px; font:inherit; }
+    .button { min-height:51px; padding:0 20px; border:0; border-radius:10px; background:linear-gradient(135deg,#ff7910,#ff5900); color:#fff; font:inherit; font-weight:900; cursor:pointer; text-decoration:none; transition:.2s; }
+    .button:hover { transform:translateY(-2px); filter:brightness(.96); }
+    .message { display:none; margin-top:18px; padding:15px; border-radius:10px; background:#ecfdf5; color:#166534; font-weight:700; }
+    .message.show { display:block; }
+    section { padding:72px 0; }
+    h2 { margin:0 0 12px; text-align:center; font-size:32px; }
+    .desc { max-width:680px; margin:0 auto 30px; color:var(--muted); text-align:center; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .feature { padding:25px; border-radius:15px; background:#fff; text-align:center; box-shadow:0 7px 20px rgba(10,50,90,.06); }
+    .feature-icon { font-size:36px; }
+    .feature h3 { margin:10px 0 7px; }
+    .feature p { margin:0; color:var(--muted); }
+    .cta-section { background:linear-gradient(120deg,#063a82,#0797dc); color:#fff; text-align:center; }
+    .cta-section h2 { color:#fff; }
+    .cta-section p { max-width:620px; margin:0 auto 22px; }
+    .cta-button { display:inline-flex; align-items:center; justify-content:center; min-width:310px; min-height:56px; padding:0 23px; border-radius:12px; background:#ff6a00; color:#fff; text-decoration:none; font-size:17px; font-weight:900; transition:.2s; }
+    .cta-button:hover { background:#e45600; transform:translateY(-2px); }
+    footer { padding:32px 0 90px; background:#101d31; color:#cbd7e7; text-align:center; font-size:14px; }
+    .sticky { display:none; }
+    @media(max-width:800px) { .form { grid-template-columns:1fr 1fr; } .form .button { grid-column:span 2; } .features { grid-template-columns:1fr; } nav { display:none; } }
+    @media(max-width:520px) { .hero { padding:67px 0 120px; } .form { grid-template-columns:1fr; } .form .button { grid-column:auto; } .cta-button { min-width:0; width:100%; } .sticky { display:block; position:fixed; bottom:0; left:0; right:0; z-index:20; padding:10px 17px; background:#fff; box-shadow:0 -3px 15px rgba(0,0,0,.12); } .sticky .cta-button { min-height:50px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top">✈️ Vé Đà Nẵng</a>
+      <nav>
+        <a href="#search">Tìm vé</a>
+        <a href="#benefits">Lợi ích</a>
+        <a href="#action">Đặt vé</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="plane">✈️</div>
+      <div class="container">
+        <span class="badge">🔥 Ưu đãi vé máy bay đi Đà Nẵng</span>
+        <h1>Khám phá Đà Nẵng<br />bắt đầu từ một chuyến bay</h1>
+        <p>Chọn ngày bay, tìm chuyến phù hợp và chuẩn bị cho kỳ nghỉ đáng nhớ tại Đà Nẵng.</p>
+      </div>
+    </section>
+
+    <section class="search-wrap" id="search" style="padding-top:0;">
+      <div class="container">
+        <div class="card">
+          <form class="form" id="flightForm">
+            <div class="field">
+              <label for="from">Điểm khởi hành</label>
+              <select id="from" required>
+                <option value="">Chọn điểm đi</option>
+                <option>Hà Nội (HAN)</option>
+                <option>TP. Hồ Chí Minh (SGN)</option>
+                <option>Đà Nẵng (DAD)</option>
+                <option>Busan (PUS)</option>
+                <option>Seoul (ICN)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="date">Ngày khởi hành</label>
+              <input id="date" type="date" required />
+            </div>
+            <div class="field">
+              <label for="passengers">Hành khách</label>
+              <select id="passengers">
+                <option>1 người lớn</option>
+                <option>2 người lớn</option>
+                <option>3 người lớn</option>
+                <option>Gia đình</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="email">Email nhận thông tin</label>
+              <input id="email" type="email" placeholder="email@example.com" required />
+            </div>
+            <button class="button" type="submit">🔍 Tìm chuyến bay</button>
+          </form>
+          <div class="message" id="message" role="status"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="container">
+        <h2>Tại sao nên tìm vé tại đây?</h2>
+        <p class="desc">Thông tin rõ ràng giúp bạn so sánh lịch bay và chuẩn bị chuyến đi dễ dàng hơn.</p>
+        <div class="features">
+          <article class="feature"><div class="feature-icon">🔎</div><h3>Dễ dàng tìm kiếm</h3><p>Nhập điểm đi, ngày bay và email để bắt đầu nhận thông tin.</p></article>
+          <article class="feature"><div class="feature-icon">💳</div><h3>Thông tin minh bạch</h3><p>Hiển thị rõ điều kiện giá, hành lý, đổi vé và hoàn vé khi có dữ liệu thật.</p></article>
+          <article class="feature"><div class="feature-icon">🌴</div><h3>Sẵn sàng khám phá</h3><p>Chuẩn bị hành trình đến biển Mỹ Khê, Sơn Trà và Hội An.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="action">
+      <div class="container">
+        <h2 id="ctaTitle">Đặt vé ngay hôm nay – Sẵn sàng cho chuyến đi trong mơ!</h2>
+        <p id="ctaDescription">Hãy bắt đầu bằng việc tìm chuyến bay phù hợp với lịch trình của bạn.</p>
+        <a href="#search" class="cta-button" id="ctaButton">✈️ Tìm vé đi Đà Nẵng</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Vé Đà Nẵng · Trang demo A/B test · Hãy thay bằng thông tin doanh nghiệp, giá và chính sách thật trước khi sử dụng.</div>
+  </footer>
+
+  <div class="sticky">
+    <a href="#search" class="cta-button" id="stickyButton">✈️ Tìm vé đi Đà Nẵng</a>
+  </div>
+
+  <script>
+    const dateInput = document.getElementById("date");
+    dateInput.min = new Date().toISOString().split("T")[0];
+
+    /*
+      A/B TEST:
+      A = positive/gain framing
+      B = loss/FOMO framing
+
+      Chọn thủ công bằng URL:
+      index.html?variant=A
+      index.html?variant=B
+
+      Nếu không có variant, trang sẽ chọn ngẫu nhiên A hoặc B.
+    */
+    const params = new URLSearchParams(window.location.search);
+    const requestedVariant = (params.get("variant") || "").toUpperCase();
+    const variant = requestedVariant === "B" ? "B" : requestedVariant === "A" ? "A" : (Math.random() < 0.5 ? "A" : "B");
+
+    const variants = {
+      A: {
+        title: "Đặt vé ngay hôm nay – Sẵn sàng cho chuyến đi trong mơ!",
+        description: "Hãy bắt đầu bằng việc tìm chuyến bay phù hợp với lịch trình của bạn.",
+        button: "✈️ Bắt đầu chuyến đi",
+        formButton: "🔍 Tìm chuyến bay",
+        message: "Cảm ơn bạn! Chúng tôi đã ghi nhận yêu cầu tìm vé. Đây là bản demo, chưa thực hiện đặt vé thật."
+      },
+      B: {
+        title: "Đừng để lỡ chuyến bay – Giá vé có thể tăng bất cứ lúc nào!",
+        description: "Kiểm tra lịch bay và giá hiện tại để tránh bỏ lỡ lựa chọn phù hợp.",
+        button: "⏰ Kiểm tra giá hiện tại",
+        formButton: "🔍 Kiểm tra chuyến bay",
+        message: "Bạn đã kiểm tra lịch bay. Đây là bản demo; giá thực tế cần được lấy từ hệ thống/API hợp lệ."
+      }
+    };
+
+    const selected = variants[variant];
+    document.getElementById("ctaTitle").textContent = selected.title;
+    document.getElementById("ctaDescription").textContent = selected.description;
+    document.getElementById("ctaButton").textContent = selected.button;
+    document.getElementById("stickyButton").textContent = selected.button;
+    document.querySelector('#flightForm button[type="submit"]').textContent = selected.formButton;
+    document.body.dataset.variant = variant;
+
+    document.getElementById("flightForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const from = document.getElementById("from").value;
+      const date = document.getElementById("date").value;
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message");
+
+      if (!from || !date || !email) {
+        message.textContent = "Vui lòng điền đầy đủ thông tin trước khi tìm chuyến bay.";
+        message.classList.add("show");
+        return;
+      }
+
+      message.textContent = selected.message;
+      message.classList.add("show");
+
+      /* Sự kiện để VWO/analytics có thể theo dõi */
+      window.dispatchEvent(new CustomEvent("flight_search_completed", {
+        detail: { variant, from, date }
+      }));
+    });
+
+    /* Gắn nhãn variant để kiểm tra bằng DevTools */
+    console.log("A/B variant:", variant);
+  </script>
+</body>
+</html>
